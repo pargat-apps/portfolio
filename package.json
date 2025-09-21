@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "security:check": "node scripts/build-csp.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "deploy:clean": "node scripts/deploy-clean.js"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
