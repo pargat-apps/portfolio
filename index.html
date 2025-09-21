@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Content Security Policy - Development Mode -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https: blob:;
+      connect-src 'self' 
+        ws://localhost:* 
+        http://localhost:* 
+        https://api.github.com 
+        https://raw.githubusercontent.com
+        https://leetcode-stats-api.herokuapp.com 
+        https://alfa-leetcode-api.onrender.com 
+        https://leetcode-api-faisalshohag.vercel.app;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+    ">
+    
+    <!-- SEO Meta Tags -->
+    <title>Pargat Singh - Full-Stack Developer | React, Node.js, AWS Expert</title>
+    <meta name="description" content="Pargat Singh is a skilled Full-Stack Developer with 2.5+ years of experience in React.js, Node.js, Express.js, MongoDB, MySQL, and AWS. Based in Ottawa, Canada. Available for new opportunities." />
+    <meta name="keywords" content="Full-Stack Developer, React Developer, Node.js, JavaScript, AWS, MongoDB, MySQL, Ottawa Developer, Web Development, Software Engineer" />
+    <meta name="author" content="Pargat Singh" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Pargat Singh - Full-Stack Developer" />
+    <meta property="og:description" content="Experienced Full-Stack Developer specializing in modern web technologies. Building scalable applications with React, Node.js, and cloud technologies." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pargatfolio.com" />
+    <meta property="og:image" content="/og-image.jpg" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pargat Singh - Full-Stack Developer" />
+    <meta name="twitter:description" content="Full-Stack Developer with expertise in React, Node.js, and modern web technologies. Available for new opportunities." />
+    <meta name="twitter:image" content="/og-image.jpg" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#3b82f6" />
+    
+    <!-- Preconnect to External Domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://api.github.com">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Pargat Singh",
+      "jobTitle": "Full-Stack Developer",
+      "url": "https://pargatfolio.com",
+      "sameAs": [
+        "https://github.com/pargat-apps",
+        "https://linkedin.com/in/pargat1204"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ottawa",
+        "addressRegion": "ON",
+        "addressCountry": "Canada"
+      },
+      "email": "pargatttsinghhh@gmail.com",
+      "telephone": "+1-613-866-2971",
+      "description": "Full-Stack Developer with 2.5+ years of experience in web development, specializing in React.js, Node.js, Express.js, MongoDB, MySQL, and AWS services."
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
