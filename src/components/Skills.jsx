@@ -60,7 +60,7 @@ const Skills = () => {
     const duplicatedSkills = [...skills, ...skills]
     
     return (
-      <div className="relative overflow-hidden py-4">
+      <div className="relative overflow-hidden py-4 w-full">
         <div className="flex gap-6 whitespace-nowrap">
           <div 
             className={`flex gap-6 ${directionClass}`}
@@ -76,11 +76,11 @@ const Skills = () => {
                 className="flex-shrink-0 group cursor-pointer"
               >
                 <div className={`
-                  relative px-6 py-4 rounded-2xl border border-border/40 
+                  relative px-4 sm:px-6 py-4 rounded-2xl border border-border/40 
                   bg-gradient-to-r ${getCategoryGradient(skill.category)} 
-                  hover:scale-110 hover:shadow-2xl hover:z-10
+                  hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:z-10
                   transition-all duration-300 ease-out
-                  min-w-[200px] text-center
+                  min-w-[160px] sm:min-w-[200px] text-center
                   backdrop-blur-sm bg-opacity-90
                 `}>
                   {/* Skill Icon */}
@@ -89,17 +89,17 @@ const Skills = () => {
                   </div>
                   
                   {/* Skill Name */}
-                  <h3 className="font-bold text-white text-lg mb-1 drop-shadow-sm">
+                  <h3 className="font-bold text-white text-sm sm:text-lg mb-1 drop-shadow-sm">
                     {skill.name}
                   </h3>
                   
                   {/* Skill Level */}
-                  <div className="text-white/90 text-sm font-medium">
+                  <div className="text-white/90 text-xs sm:text-sm font-medium">
                     {skill.level}% Mastery
                   </div>
                   
                   {/* Category Badge */}
-                  <div className="absolute -top-2 -right-2 px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs text-white font-medium border border-white/30">
+                  <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 px-1 sm:px-2 py-0.5 sm:py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] sm:text-xs text-white font-medium border border-white/30">
                     {skill.category}
                   </div>
                   
@@ -117,14 +117,14 @@ const Skills = () => {
         </div>
         
         {/* Fade masks for seamless edges */}
-        <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-background via-background/80 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 left-0 w-16 sm:w-32 h-full bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-16 sm:w-32 h-full bg-gradient-to-l from-background via-background/80 to-transparent pointer-events-none z-10" />
       </div>
     )
   }
 
   return (
-    <section id="skills" className="py-20 lg:py-32 relative overflow-hidden">
+    <section id="skills" className="py-20 lg:py-32 relative overflow-hidden w-full">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
