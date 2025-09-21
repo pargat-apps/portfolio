@@ -3,7 +3,8 @@ import {
   fetchGitHubRepos, 
   fetchGitHubUser, 
   fetchRepoReadme, 
-  extractDemoURL 
+  extractDemoURL,
+  extractDescription
 } from '../utils/api'
 
 export const useGitHub = (username) => {
@@ -52,16 +53,19 @@ export const useGitHub = (username) => {
                 return {
                   ...repo,
                   demoUrl: null,
+                  description: repo.description,
                   enhanced: true
                 }
               }
 
               const readme = await fetchRepoReadme(username, repo.name)
               const demoUrl = extractDemoURL(readme)
+              const description = extractDescription(readme)
               
               return {
                 ...repo,
                 demoUrl,
+                description: description || repo.description,
                 enhanced: true
               }
             } catch {
