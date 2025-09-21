@@ -60,10 +60,10 @@ const Skills = () => {
     const duplicatedSkills = [...skills, ...skills]
     
     return (
-      <div className="relative overflow-hidden py-4 w-full">
-        <div className="flex gap-6 whitespace-nowrap">
+      <div className="relative overflow-hidden py-3 w-full">
+        <div className="flex gap-4 whitespace-nowrap">
           <div 
-            className={`flex gap-6 ${directionClass}`}
+            className={`flex gap-4 ${directionClass}`}
             style={{
               animationDuration: speedDuration,
               animationTimingFunction: "linear",
@@ -76,30 +76,30 @@ const Skills = () => {
                 className="flex-shrink-0 group cursor-pointer"
               >
                 <div className={`
-                  relative px-4 sm:px-6 py-4 rounded-2xl border border-border/40 
+                  relative px-3 sm:px-4 py-3 rounded-xl border border-border/40 
                   bg-gradient-to-r ${getCategoryGradient(skill.category)} 
                   hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:z-10
                   transition-all duration-300 ease-out
-                  min-w-[160px] sm:min-w-[200px] text-center
+                  min-w-[120px] sm:min-w-[140px] text-center
                   backdrop-blur-sm bg-opacity-90
                 `}>
                   {/* Skill Icon */}
-                  <div className="text-3xl mb-2 group-hover:scale-125 transition-transform duration-300">
+                  <div className="text-2xl sm:text-2xl mb-1.5 group-hover:scale-125 transition-transform duration-300">
                     {skill.icon}
                   </div>
                   
                   {/* Skill Name */}
-                  <h3 className="font-bold text-white text-sm sm:text-lg mb-1 drop-shadow-sm">
+                  <h3 className="font-bold text-white text-xs sm:text-sm mb-1 drop-shadow-sm">
                     {skill.name}
                   </h3>
                   
                   {/* Skill Level */}
-                  <div className="text-white/90 text-xs sm:text-sm font-medium">
+                  <div className="text-white/90 text-[10px] sm:text-xs font-medium">
                     {skill.level}% Mastery
                   </div>
                   
                   {/* Category Badge */}
-                  <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 px-1 sm:px-2 py-0.5 sm:py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] sm:text-xs text-white font-medium border border-white/30">
+                  <div className="absolute -top-1 -right-1 px-1 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-[8px] sm:text-[10px] text-white font-medium border border-white/30">
                     {skill.category}
                   </div>
                   
@@ -162,7 +162,7 @@ const Skills = () => {
 
         {/* Marquee Skills Display */}
         <motion.div
-          className="space-y-8"
+          className="space-y-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
