@@ -186,7 +186,7 @@ const Skills = () => {
 
         {/* Skills Summary */}
         <motion.div
-          className="mt-20 text-center"
+          className="mt-20 text-center px-4 sm:px-0"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -194,31 +194,31 @@ const Skills = () => {
         >
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-8 p-8 glass-card rounded-3xl bg-gradient-to-r from-primary/5 to-blue-500/5 border border-primary/20"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 p-4 sm:p-8 glass-card rounded-3xl bg-gradient-to-r from-primary/5 to-blue-500/5 border border-primary/20 max-w-full"
           >
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">
+            <div className="text-center flex-1 min-w-0">
+              <div className="text-2xl sm:text-4xl font-bold text-primary mb-2">
                 {getAllSkills().length}+
               </div>
-              <div className="text-muted-foreground font-medium">
+              <div className="text-sm sm:text-base text-muted-foreground font-medium">
                 Technologies
               </div>
             </div>
-            <div className="w-px h-16 bg-border" />
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">
+            <div className="hidden sm:block w-px h-16 bg-border flex-shrink-0" />
+            <div className="text-center flex-1 min-w-0">
+              <div className="text-2xl sm:text-4xl font-bold text-primary mb-2">
                 2.5+
               </div>
-              <div className="text-muted-foreground font-medium">
+              <div className="text-sm sm:text-base text-muted-foreground font-medium">
                 Years Experience
               </div>
             </div>
-            <div className="w-px h-16 bg-border" />
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">
+            <div className="hidden sm:block w-px h-16 bg-border flex-shrink-0" />
+            <div className="text-center flex-1 min-w-0">
+              <div className="text-2xl sm:text-4xl font-bold text-primary mb-2">
                 5
               </div>
-              <div className="text-muted-foreground font-medium">
+              <div className="text-sm sm:text-base text-muted-foreground font-medium">
                 Categories
               </div>
             </div>
