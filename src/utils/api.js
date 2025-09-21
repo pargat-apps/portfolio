@@ -84,60 +84,6 @@ export const extractDemoURL = (readmeContent) => {
   return null
 }
 
-// Extract description from README
-export const extractDescription = (readmeContent) => {
-  if (!readmeContent) return null
-  
-  // Remove markdown formatting and clean up the content
-  let cleanContent = readmeContent
-    .replace(/^#+\s*/gm, '') // Remove headers
-    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold formatting
-    .replace(/\*(.*?)\*/g, '$1') // Remove italic formatting
-    .replace(/`(.*?)`/g, '$1') // Remove inline code formatting
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove markdown links
-    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '') // Remove images
-    .replace(/```[\s\S]*?```/g, '') // Remove code blocks
-    .replace(/\n+/g, ' ') // Replace multiple newlines with single space
-    .trim()
-  
-  // Look for description patterns
-  const patterns = [
-    /^(.{50,200})\.?\s*(?=\n|$)/m, // First paragraph (50-200 chars)
-    /##?\s*Description[:\s]*(.{50,200})/i, // Description section
-    /##?\s*About[:\s]*(.{50,200})/i, // About section
-    /##?\s*Overview[:\s]*(.{50,200})/i, // Overview section
-    /^(.{30,150})\.?\s*(?=\n|$)/m, // First line (30-150 chars)
-  ]
-  
-  for (const pattern of patterns) {
-    const match = cleanContent.match(pattern)
-    if (match) {
-      let description = match[1].trim()
-      // Clean up the description
-      description = description
-        .replace(/^[-*]\s*/, '') // Remove list markers
-        .replace(/\s+/g, ' ') // Normalize whitespace
-        .trim()
-      
-      // Ensure it's not too short or too long
-      if (description.length >= 30 && description.length <= 200) {
-        return description
-      }
-    }
-  }
-  
-  // Fallback: take first meaningful sentence
-  const sentences = cleanContent.split(/[.!?]+/)
-  for (const sentence of sentences) {
-    const trimmed = sentence.trim()
-    if (trimmed.length >= 30 && trimmed.length <= 200) {
-      return trimmed + (trimmed.endsWith('.') ? '' : '.')
-    }
-  }
-  
-  return null
-}
-
 export const fetchRepoReadme = async (username, repoName) => {
   try {
     const response = await secureFetch(`https://api.github.com/repos/${username}/${repoName}/readme`)

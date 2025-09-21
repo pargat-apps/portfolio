@@ -79,16 +79,6 @@ const Projects = () => {
         )}
       </div>
 
-      <p className="text-muted-foreground mb-4 flex-grow leading-relaxed text-sm">
-        {project.description ? (
-          project.description.length > 120 ? 
-            `${project.description.substring(0, 120)}...` : 
-            project.description
-        ) : (
-          "No description available."
-        )}
-      </p>
-
       {/* Technologies */}
       <div className="flex flex-wrap gap-2 mb-4">
         {isGithub ? (
