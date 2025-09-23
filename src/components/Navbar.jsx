@@ -25,20 +25,9 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 50)
     }
 
-    const handleClickOutside = (event) => {
-      if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container')) {
-        setIsMobileMenuOpen(false)
-      }
-    }
-
     window.addEventListener("scroll", handleScroll)
-    document.addEventListener("click", handleClickOutside)
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      document.removeEventListener("click", handleClickOutside)
-    }
-  }, [isMobileMenuOpen])
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const scrollToSection = (href) => {
     // Close mobile menu first
@@ -183,7 +172,10 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => {
+                console.log('Hamburger clicked, current state:', isMobileMenuOpen)
+                setIsMobileMenuOpen(!isMobileMenuOpen)
+              }}
               className="rounded-full"
             >
               {isMobileMenuOpen ? (
@@ -203,7 +195,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass border-t border-border/10 mt-2 mobile-menu-container"
+            className="lg:hidden glass border-t border-border/10 mt-2"
           >
             <div className="px-4 py-6 space-y-4">
               {navigationItems.map((item) => (
