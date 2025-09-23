@@ -4,7 +4,7 @@ A modern, responsive, and professional portfolio website showcasing my expertise
 
 ## 🌐 Live Demo
 
-Visit my portfolio: **[pargatfolio.com](https://pargatfolio.com)**
+🔗 Live Demo: https://pargatfolio.com/
 
 ## ✨ Features
 
