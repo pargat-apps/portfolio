@@ -68,37 +68,37 @@ export const experience = [
 
 export const skills = {
   frontend: [
-    { name: "HTML5", level: 95, category: "Frontend", icon: "🌐" },
-    { name: "CSS3", level: 90, category: "Frontend", icon: "🎨" },
-    { name: "Tailwind CSS", level: 95, category: "Frontend", icon: "💨" },
-    { name: "JavaScript (ES6+)", level: 95, category: "Frontend", icon: "⚡" },
-    { name: "React.js", level: 90, category: "Frontend", icon: "⚛️" },
-    { name: "Redux", level: 85, category: "Frontend", icon: "🔄" }
+    { name: "HTML5", level: 95, category: "Frontend", icon: "🌐", color: "#E34F26" },
+    { name: "CSS3", level: 90, category: "Frontend", icon: "🎨", color: "#1572B6" },
+    { name: "Tailwind CSS", level: 95, category: "Frontend", icon: "💨", color: "#06B6D4" },
+    { name: "JavaScript (ES6+)", level: 95, category: "Frontend", icon: "⚡", color: "#F7DF1E" },
+    { name: "React.js", level: 90, category: "Frontend", icon: "⚛️", color: "#61DAFB" },
+    { name: "Redux", level: 85, category: "Frontend", icon: "🔄", color: "#764ABC" }
   ],
   backend: [
-    { name: "Node.js", level: 90, category: "Backend", icon: "🟢" },
-    { name: "Express.js", level: 90, category: "Backend", icon: "🚀" },
-    { name: "REST APIs", level: 95, category: "Backend", icon: "🔗" },
-    { name: "MVC Architecture", level: 85, category: "Backend", icon: "🏗️" }
+    { name: "Node.js", level: 90, category: "Backend", icon: "🟢", color: "#339933" },
+    { name: "Express.js", level: 90, category: "Backend", icon: "🚀", color: "#000000" },
+    { name: "REST APIs", level: 95, category: "Backend", icon: "🔗", color: "#FF6B6B" },
+    { name: "MVC Architecture", level: 85, category: "Backend", icon: "🏗️", color: "#4ECDC4" }
   ],
   database: [
-    { name: "SQL", level: 90, category: "Database", icon: "📊" },
-    { name: "MySQL", level: 90, category: "Database", icon: "🐬" },
-    { name: "MongoDB", level: 85, category: "Database", icon: "🍃" },
-    { name: "PL/SQL (Oracle)", level: 80, category: "Database", icon: "🔶" }
+    { name: "SQL", level: 90, category: "Database", icon: "📊", color: "#336791" },
+    { name: "MySQL", level: 90, category: "Database", icon: "🐬", color: "#4479A1" },
+    { name: "MongoDB", level: 85, category: "Database", icon: "🍃", color: "#47A248" },
+    { name: "PL/SQL (Oracle)", level: 80, category: "Database", icon: "🔶", color: "#F80000" }
   ],
   cloud: [
-    { name: "AWS EC2", level: 75, category: "Cloud", icon: "☁️" },
-    { name: "Firewalls", level: 80, category: "Cloud", icon: "🔥" },
-    { name: "VPN", level: 75, category: "Cloud", icon: "🔒" },
-    { name: "Network Switches", level: 75, category: "Cloud", icon: "🔌" }
+    { name: "AWS EC2", level: 75, category: "Cloud", icon: "☁️", color: "#FF9900" },
+    { name: "Firewalls", level: 80, category: "Cloud", icon: "🔥", color: "#FF5722" },
+    { name: "VPN", level: 75, category: "Cloud", icon: "🔒", color: "#2196F3" },
+    { name: "Network Switches", level: 75, category: "Cloud", icon: "🔌", color: "#9C27B0" }
   ],
   tools: [
-    { name: "Git", level: 95, category: "Tools", icon: "📝" },
-    { name: "GitHub", level: 95, category: "Tools", icon: "🐙" },
-    { name: "Linux", level: 80, category: "Tools", icon: "🐧" },
-    { name: "Debugging", level: 90, category: "Tools", icon: "🐛" },
-    { name: "Problem Solving", level: 95, category: "Tools", icon: "🧩" }
+    { name: "Git", level: 95, category: "Tools", icon: "📝", color: "#F05032" },
+    { name: "GitHub", level: 95, category: "Tools", icon: "🐙", color: "#181717" },
+    { name: "Linux", level: 80, category: "Tools", icon: "🐧", color: "#FCC624" },
+    { name: "Debugging", level: 90, category: "Tools", icon: "🐛", color: "#FF9800" },
+    { name: "Problem Solving", level: 95, category: "Tools", icon: "🧩", color: "#4CAF50" }
   ]
 }
 

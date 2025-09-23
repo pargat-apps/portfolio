@@ -61,9 +61,9 @@ const Skills = () => {
     
     return (
       <div className="relative overflow-hidden py-3 w-full">
-        <div className="flex gap-4 whitespace-nowrap">
+        <div className="flex gap-2 sm:gap-4 whitespace-nowrap">
           <div 
-            className={`flex gap-4 ${directionClass}`}
+            className={`flex gap-2 sm:gap-4 ${directionClass}`}
             style={{
               animationDuration: speedDuration,
               animationTimingFunction: "linear",
@@ -75,31 +75,48 @@ const Skills = () => {
                 key={`${skill.name}-${index}`}
                 className="flex-shrink-0 group cursor-pointer"
               >
-                <div className={`
-                  relative px-3 sm:px-4 py-3 rounded-xl border border-border/40 
-                  bg-gradient-to-r ${getCategoryGradient(skill.category)} 
-                  hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:z-10
-                  transition-all duration-300 ease-out
-                  min-w-[120px] sm:min-w-[140px] text-center
-                  backdrop-blur-sm bg-opacity-90
-                `}>
+                <div 
+                  className={`
+                    relative px-2 sm:px-4 py-2 sm:py-3 rounded-xl border border-border/40 
+                    bg-gradient-to-r ${getCategoryGradient(skill.category)} 
+                    hover:scale-105 sm:hover:scale-110 hover:shadow-2xl hover:z-10
+                    transition-all duration-300 ease-out
+                    min-w-[100px] sm:min-w-[140px] text-center
+                    backdrop-blur-sm bg-opacity-90
+                  `}
+                  style={{
+                    boxShadow: skill.color ? `0 4px 12px ${skill.color}20` : undefined
+                  }}
+                >
                   {/* Skill Icon */}
-                  <div className="text-2xl sm:text-2xl mb-1.5 group-hover:scale-125 transition-transform duration-300">
+                  <div 
+                    className="text-xl sm:text-2xl mb-1 sm:mb-1.5 group-hover:scale-125 transition-transform duration-300"
+                    style={{ 
+                      filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+                      textShadow: '0 0 8px rgba(255,255,255,0.3)'
+                    }}
+                  >
                     {skill.icon}
                   </div>
                   
                   {/* Skill Name */}
-                  <h3 className="font-bold text-white text-xs sm:text-sm mb-1 drop-shadow-sm">
+                  <h3 className="font-bold text-white text-[10px] sm:text-sm mb-0.5 sm:mb-1 drop-shadow-sm">
                     {skill.name}
                   </h3>
                   
                   {/* Skill Level */}
-                  <div className="text-white/90 text-[10px] sm:text-xs font-medium">
+                  <div className="text-white/90 text-[8px] sm:text-xs font-medium">
                     {skill.level}% Mastery
                   </div>
                   
                   {/* Category Badge */}
-                  <div className="absolute -top-1 -right-1 px-1 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-[8px] sm:text-[10px] text-white font-medium border border-white/30">
+                  <div 
+                    className="absolute -top-1 -right-1 px-0.5 sm:px-1 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-[6px] sm:text-[10px] text-white font-medium border border-white/30"
+                    style={{
+                      backgroundColor: skill.color ? `${skill.color}20` : undefined,
+                      borderColor: skill.color ? `${skill.color}40` : undefined
+                    }}
+                  >
                     {skill.category}
                   </div>
                   
