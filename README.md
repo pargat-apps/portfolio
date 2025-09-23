@@ -4,7 +4,7 @@ A modern, responsive, and professional portfolio website showcasing my expertise
 
 ## 🌐 Live Demo
 
-🔗 Live Demo: https://pargat-apps.github.io/LCOF2477/
+🔗 Live Demo: https://pargatfolio.com/
 
 ## ✨ Features
 
