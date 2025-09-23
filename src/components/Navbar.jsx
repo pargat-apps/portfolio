@@ -25,16 +25,38 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 50)
     }
 
+    const handleClickOutside = (event) => {
+      if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container')) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    document.addEventListener("click", handleClickOutside)
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      document.removeEventListener("click", handleClickOutside)
+    }
+  }, [isMobileMenuOpen])
 
   const scrollToSection = (href) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-      setIsMobileMenuOpen(false)
-    }
+    // Close mobile menu first
+    setIsMobileMenuOpen(false)
+    
+    // Small delay to ensure menu closes before scrolling
+    setTimeout(() => {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest"
+        })
+      } else {
+        console.warn(`Element with selector "${href}" not found`)
+      }
+    }, 100)
   }
 
   return (
@@ -51,7 +73,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
-            onClick={() => scrollToSection("#hero")}
+            onClick={() => scrollToSection("#home")}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="flex items-center space-x-3 cursor-pointer group"
@@ -181,16 +203,16 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass border-t border-border/10 mt-2"
+            className="lg:hidden glass border-t border-border/10 mt-2 mobile-menu-container"
           >
             <div className="px-4 py-6 space-y-4">
               {navigationItems.map((item) => (
                 <motion.button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left text-muted-foreground hover:text-accent-foreground transition-colors duration-200 font-medium py-2"
+                  className="block w-full text-left text-muted-foreground hover:text-accent-foreground transition-colors duration-200 font-medium py-3 px-2 rounded-lg hover:bg-accent/50"
                   whileHover={{ x: 8 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {item.name}
                 </motion.button>
