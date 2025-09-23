@@ -175,14 +175,14 @@ const LeetCode = () => {
             </div>
 
             <div className="space-y-2">
-              {stats.ranking && (
+              {stats.ranking && stats.ranking > 0 && (
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <TrendingUp className="w-4 h-4" />
                   <span>Ranking: {stats.ranking.toLocaleString()}</span>
                 </div>
               )}
               
-              {stats.acceptanceRate && (
+              {stats.acceptanceRate && stats.acceptanceRate > 0 && (
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Target className="w-4 h-4" />
                   <span>Acceptance Rate: {stats.acceptanceRate}%</span>
@@ -236,7 +236,9 @@ const LeetCode = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          {difficultyData.map((difficulty, index) => (
+          {difficultyData
+            .filter(difficulty => difficulty.count > 0)
+            .map((difficulty, index) => (
             <motion.div
               key={difficulty.name}
               variants={itemVariants}

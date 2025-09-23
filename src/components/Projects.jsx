@@ -61,7 +61,7 @@ const Projects = () => {
           </h3>
         </div>
         
-        {isGithub && (
+        {isGithub && (project.stargazers_count > 0 || project.forks_count > 0) && (
           <div className="flex items-center gap-3 text-sm text-muted-foreground">
             {project.stargazers_count > 0 && (
               <div className="flex items-center gap-1">
@@ -233,35 +233,41 @@ const Projects = () => {
               <div className="text-sm text-muted-foreground">Repositories</div>
             </motion.div>
             
-            <motion.div
-              variants={itemVariants}
-              className="text-center p-4 glass-card rounded-lg"
-            >
-              <div className="text-2xl font-bold text-primary mb-1">
-                {stats.totalStars}
-              </div>
-              <div className="text-sm text-muted-foreground">Stars</div>
-            </motion.div>
+            {stats.totalStars > 0 && (
+              <motion.div
+                variants={itemVariants}
+                className="text-center p-4 glass-card rounded-lg"
+              >
+                <div className="text-2xl font-bold text-primary mb-1">
+                  {stats.totalStars}
+                </div>
+                <div className="text-sm text-muted-foreground">Stars</div>
+              </motion.div>
+            )}
             
-            <motion.div
-              variants={itemVariants}
-              className="text-center p-4 glass-card rounded-lg"
-            >
-              <div className="text-2xl font-bold text-primary mb-1">
-                {stats.totalForks}
-              </div>
-              <div className="text-sm text-muted-foreground">Forks</div>
-            </motion.div>
+            {stats.totalForks > 0 && (
+              <motion.div
+                variants={itemVariants}
+                className="text-center p-4 glass-card rounded-lg"
+              >
+                <div className="text-2xl font-bold text-primary mb-1">
+                  {stats.totalForks}
+                </div>
+                <div className="text-sm text-muted-foreground">Forks</div>
+              </motion.div>
+            )}
             
-            <motion.div
-              variants={itemVariants}
-              className="text-center p-4 glass-card rounded-lg"
-            >
-              <div className="text-2xl font-bold text-primary mb-1">
-                {stats.followers}
-              </div>
-              <div className="text-sm text-muted-foreground">Followers</div>
-            </motion.div>
+            {stats.followers > 0 && (
+              <motion.div
+                variants={itemVariants}
+                className="text-center p-4 glass-card rounded-lg"
+              >
+                <div className="text-2xl font-bold text-primary mb-1">
+                  {stats.followers}
+                </div>
+                <div className="text-sm text-muted-foreground">Followers</div>
+              </motion.div>
+            )}
           </motion.div>
         )}
 
