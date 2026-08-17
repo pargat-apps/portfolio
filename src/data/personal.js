@@ -27,7 +27,7 @@ import { Webhook, Radio, Workflow } from "lucide-react"
 
 export const personalInfo = {
   name: "Pargat Singh",
-  title: "Full-Stack Developer",
+  title: "Full-Stack Web Developer",
   location: "Ottawa, ON, Canada",
   phone: "+1 (613) 866 2971",
   email: "pargatttsinghhh@gmail.com",
@@ -35,14 +35,14 @@ export const personalInfo = {
   github: "github.com/pargat-apps",
   githubUsername: "pargat-apps",
   linkedin: "linkedin.com/in/pargat1204",
-  
-  bio: "Passionate Full-Stack Developer with 2.5+ years of experience building scalable web applications and optimizing system performance. Currently pursuing advanced studies in Full Stack Software Development at Lambton College, Ottawa. I excel at transforming complex problems into elegant, user-friendly solutions.",
-  
-  funFact: "When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and building innovative solutions that make a difference. I believe in writing clean, maintainable code and staying updated with the latest industry trends.",
-  
+
+  bio: "Full-Stack Software Developer with 2+ years of professional experience building and shipping production web applications end to end. Strong in JavaScript, React.js, Node.js and Express.js, with hands-on experience designing REST APIs, modelling MySQL and MongoDB schemas, integrating third-party services, and deploying to AWS EC2 on Linux. Currently completing a Post-Graduate Diploma in Full Stack Software Development at Lambton College, Ottawa.",
+
+  funFact: "Beyond shipping production code, I mentor other developers as a Peer Tutor at Lambton College, coaching students through JavaScript, React, Node.js/Express, MongoDB, Git/GitHub, CI/CD, containerization and cloud deployment toward independent debugging.",
+
   tagline: "Building the future, one line of code at a time",
-  
-  heroDescription: "I'm a dedicated full-stack developer who loves creating exceptional digital experiences. With expertise in modern web technologies and a passion for clean, efficient code, I turn ideas into powerful, scalable applications.",
+
+  heroDescription: "I build production web applications end to end — from REST APIs and database schemas to polished React interfaces — using JavaScript, React.js, Node.js and Express.js.",
   
   resume: "/PARGAT_SINGH_RESUME.pdf", // Path to resume file
   
@@ -58,38 +58,57 @@ export const experience = [
   {
     id: 1,
     company: "Lambton College",
-    role: "Postgraduate Diploma - Full Stack Software Development",
+    role: "Post-Graduate Diploma, Full Stack Software Development",
     location: "Ottawa, ON, Canada",
-    duration: "Jan 2024 – Present",
+    duration: "Sep 2024 – June 2026",
     type: "Education",
-    description: "Currently pursuing advanced studies in full-stack development with hands-on experience in modern web technologies, cloud platforms, and industry-standard development practices.",
+    description: "Two-year postgraduate diploma in full-stack development, covering modern web technologies, cloud platforms and industry-standard development practices.",
     achievements: [
-      "Mastering advanced React.js concepts including hooks, context API, and performance optimization",
-      "Developing expertise in cloud platforms (AWS) and modern deployment strategies",
-      "Building real-world applications using MERN stack with professional coding standards",
-      "Learning DevOps practices including CI/CD pipelines and containerization with Docker",
-      "Collaborating on team projects using Agile methodologies and version control best practices",
-      "Completing capstone project demonstrating full-stack application development skills"
+      "Worked as a Peer Tutor for DevOps and Full Stack JavaScript (Co-op Term, 2026), tutoring JavaScript, React, Node.js/Express, MongoDB, Git/GitHub, CI/CD, containerization and cloud deployment, and coaching students toward independent debugging."
     ],
-    technologies: ["React", "Redux", "Node.js", "Express.js", "MongoDB", "AWS", "Docker", "Git", "Agile"]
+    technologies: ["JavaScript", "React.js", "Node.js", "Express.js", "MongoDB", "Git", "GitHub", "CI/CD", "Docker"]
   },
   {
     id: 2,
-    company: "Mozo Cloud Services Pvt Ltd",
-    role: "Full-Stack Developer",
+    company: "Mozo Cloud Services Pvt. Ltd.",
+    role: "Full-Stack Web Developer",
     location: "Chandigarh, India",
-    duration: "Jan 2022 – Dec 2023",
+    duration: "2021 – 2023",
     type: "Full-time",
-    description: "Led full-stack development initiatives, optimizing system performance and delivering scalable solutions for enterprise clients.",
+    description: "Full-stack development role building and shipping production web applications end to end for enterprise clients.",
     achievements: [
-      "Built and optimized responsive web applications with React.js and Node.js, improving user engagement by 35%",
-      "Designed scalable SQL database schemas supporting 10,000+ customer records with optimized query performance",
-      "Developed asynchronous services and REST APIs in Express.js for real-time system monitoring and alerts",
-      "Successfully debugged and refactored legacy code, fixing 100+ high-priority bugs while maintaining 99.9% uptime",
-      "Built a real-time video chat application using WebRTC with peer-to-peer communication capabilities",
-      "Managed version control with Git/GitHub and executed comprehensive full-stack test suites"
+      "Built and shipped production full-stack applications using React.js, Node.js, Express.js and MySQL, including real estate listing platforms, custom admin panels and role-based dashboards.",
+      "Designed normalized MySQL schemas for a CRM holding 10,000+ customer records, cutting reporting and search response times through targeted indexing and query optimization.",
+      "Developed real-time video streaming and click-to-call features with WebRTC and WebSockets, integrating Tata Tele telephony APIs to route inbound customers to available agents.",
+      "Integrated Meta Graph API and WhatsApp Business API for marketing campaigns and automated lead capture, and built PayPal, Paytm and PhonePe payment flows with webhook confirmation.",
+      "Deployed and maintained applications on AWS EC2 (Linux) using Git/GitHub workflows, and resolved production defects reported by client teams."
     ],
-    technologies: ["React.js", "Node.js", "Express.js", "SQL", "MySQL", "Git", "GitHub", "WebRTC", "REST APIs"]
+    technologies: ["React.js", "Node.js", "Express.js", "MySQL", "AWS EC2", "WebRTC", "WebSockets", "Git", "GitHub"]
+  },
+  {
+    id: 3,
+    company: "Shareware Infotech",
+    role: "Front-End Developer",
+    location: "India",
+    duration: "2020 – 2021",
+    type: "Full-time",
+    description: "Front-end development role building responsive, cross-browser interfaces from design mockups.",
+    achievements: [
+      "Built responsive, cross-browser interfaces with HTML5, CSS3, JavaScript and React.js, converting design mockups into reusable components with state handling and form validation.",
+      "Integrated REST APIs with asynchronous data fetching and explicit loading and error states, and debugged compatibility issues across browsers and screen sizes."
+    ],
+    technologies: ["HTML5", "CSS3", "JavaScript", "React.js", "REST APIs"]
+  },
+  {
+    id: 4,
+    company: "Guru Nanak Dev Engineering College",
+    role: "B.Tech, Electronics and Communication Engineering",
+    location: "Ludhiana, Punjab, India",
+    duration: "2019",
+    type: "Education",
+    description: "Four-year Bachelor's degree in Electronics and Communication Engineering.",
+    achievements: [],
+    technologies: []
   }
 ]
 

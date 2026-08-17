@@ -366,7 +366,7 @@ const Contact = () => {
                 </h3>
               </div>
               <p className="text-green-600 dark:text-green-300 text-sm leading-relaxed">
-                I'm currently open to new opportunities and exciting projects. Whether you're looking for a full-time developer, freelance help, or just want to collaborate on something amazing, I'd love to hear from you!
+                Open to new opportunities across Canada. I hold a valid Post-Graduate Work Permit (until 2029) and am authorized to work full-time anywhere in Canada — no sponsorship required.
               </p>
             </motion.div>
           </motion.div>

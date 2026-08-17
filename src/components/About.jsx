@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Download, ExternalLink, Coffee, Code2, Zap } from "lucide-react"
+import { Download, ExternalLink, Coffee, Code2, Zap, Database, Building2 } from "lucide-react"
 import { Button } from "./ui/Button"
 import { personalInfo } from "../data/personal"
 import { useGitHub } from "../hooks/useGitHub"
@@ -30,9 +30,9 @@ const About = () => {
   }
 
   const stats = [
-    { label: "Years Experience", value: "2.5+", icon: Code2 },
-    { label: "Projects Completed", value: "25+", icon: Zap },
-    { label: "Cups of Coffee", value: "∞", icon: Coffee },
+    { label: "Years Experience", value: "2+", icon: Code2 },
+    { label: "Customer Records Managed", value: "10K+", icon: Database },
+    { label: "Companies", value: "2", icon: Building2 },
   ]
 
   return (

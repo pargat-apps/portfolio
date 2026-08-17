@@ -186,55 +186,59 @@ const Experience = () => {
                     </p>
 
                     {/* Achievements */}
-                    <div className="mb-4 sm:mb-6">
-                      <h4 className="font-semibold text-accent-foreground mb-3 flex items-center gap-2 text-sm sm:text-base">
-                        <Award className="w-4 h-4 text-primary flex-shrink-0" />
-                        Key Achievements
-                      </h4>
-                      <ul className="space-y-2">
-                        {exp.achievements.map((achievement, achIndex) => (
-                          <motion.li
-                            key={achIndex}
-                            className="flex items-start gap-2 text-muted-foreground"
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: achIndex * 0.1 }}
-                          >
-                            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 mt-0.5 text-primary flex-shrink-0" />
-                            <span className="leading-relaxed text-sm sm:text-base">{achievement}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
+                    {exp.achievements.length > 0 && (
+                      <div className="mb-4 sm:mb-6">
+                        <h4 className="font-semibold text-accent-foreground mb-3 flex items-center gap-2 text-sm sm:text-base">
+                          <Award className="w-4 h-4 text-primary flex-shrink-0" />
+                          Key Achievements
+                        </h4>
+                        <ul className="space-y-2">
+                          {exp.achievements.map((achievement, achIndex) => (
+                            <motion.li
+                              key={achIndex}
+                              className="flex items-start gap-2 text-muted-foreground"
+                              initial={{ opacity: 0, x: -10 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: achIndex * 0.1 }}
+                            >
+                              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 mt-0.5 text-primary flex-shrink-0" />
+                              <span className="leading-relaxed text-sm sm:text-base">{achievement}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     {/* Technologies */}
-                    <div>
-                      <h4 className="font-semibold text-accent-foreground mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
-                        <div className="w-2 h-2 bg-gradient-to-r from-primary to-blue-600 rounded-full flex-shrink-0" />
-                        Technologies & Skills
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech, techIndex) => (
-                          <motion.span
-                            key={tech}
-                            className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full border transition-all duration-200 ${
-                              exp.type === "Education"
-                                ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/40"
-                                : "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20"
-                            }`}
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: techIndex * 0.05 }}
-                          >
-                            {tech}
-                          </motion.span>
-                        ))}
+                    {exp.technologies.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-accent-foreground mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
+                          <div className="w-2 h-2 bg-gradient-to-r from-primary to-blue-600 rounded-full flex-shrink-0" />
+                          Technologies & Skills
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.technologies.map((tech, techIndex) => (
+                            <motion.span
+                              key={tech}
+                              className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full border transition-all duration-200 ${
+                                exp.type === "Education"
+                                  ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/40"
+                                  : "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20"
+                              }`}
+                              whileHover={{ scale: 1.05, y: -2 }}
+                              whileTap={{ scale: 0.95 }}
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: techIndex * 0.05 }}
+                            >
+                              {tech}
+                            </motion.span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
 
                     {/* Hover Gradient Effect */}
                     <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/0 to-blue-600/0 group-hover:from-primary/5 group-hover:to-blue-600/5 transition-all duration-300 pointer-events-none" />
