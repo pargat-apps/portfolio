@@ -1,124 +1,113 @@
 import { motion } from "framer-motion"
-import { useState } from "react"
-import { Github, ExternalLink, Star, GitFork, Calendar, Code, Loader2 } from "lucide-react"
+import { Github, ExternalLink, Star, Layers, ShoppingCart, Video, Server, Code } from "lucide-react"
 import { Button } from "./ui/Button"
-import { useGitHub } from "../hooks/useGitHub"
-import { personalInfo, projects as staticProjects } from "../data/personal"
-import { formatDate } from "../utils/api"
+import { personalInfo, projects } from "../data/personal"
 
-const Projects = () => {
-  const [activeTab, setActiveTab] = useState("github")
-  const { repos, loading, error, getFeaturedRepos, getTotalStats } = useGitHub(personalInfo.githubUsername)
+const categoryStyles = {
+  "Full-Stack": { icon: Layers, gradient: "from-blue-500 to-purple-600" },
+  "E-Commerce": { icon: ShoppingCart, gradient: "from-orange-500 to-pink-500" },
+  "Real-Time": { icon: Video, gradient: "from-teal-500 to-cyan-500" },
+  "Backend": { icon: Server, gradient: "from-green-500 to-emerald-600" },
+  "Frontend": { icon: Code, gradient: "from-indigo-500 to-blue-500" },
+}
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+const getCategoryStyle = (category) =>
+  categoryStyles[category] || { icon: Code, gradient: "from-gray-500 to-gray-600" }
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
     },
-  }
+  },
+}
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-      },
+const itemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
     },
-  }
+  },
+}
 
-  const cardVariants = {
-    hidden: { scale: 0.9, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-      },
+const cardVariants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.4,
     },
-  }
+  },
+}
 
-  const ProjectCard = ({ project, isGithub = false }) => (
+const ProjectCard = ({ project }) => {
+  const { icon: CategoryIcon, gradient } = getCategoryStyle(project.category)
+
+  return (
     <motion.div
       variants={cardVariants}
       whileHover={{ y: -5 }}
-      className="glass-card p-6 h-full flex flex-col group hover:shadow-xl transition-all duration-300"
+      className="glass-card overflow-hidden h-full flex flex-col group hover:shadow-xl transition-all duration-300"
     >
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          {isGithub ? (
-            <Github className="w-5 h-5 text-muted-foreground" />
-          ) : (
-            <Code className="w-5 h-5 text-primary" />
-          )}
-          <h3 className="font-semibold text-accent-foreground group-hover:text-primary transition-colors">
-            {project.name || project.title}
-          </h3>
-        </div>
-        
-        {isGithub && (project.stargazers_count > 0 || project.forks_count > 0) && (
-          <div className="flex items-center gap-3 text-sm text-muted-foreground">
-            {project.stargazers_count > 0 && (
-              <div className="flex items-center gap-1">
-                <Star className="w-4 h-4" />
-                {project.stargazers_count}
-              </div>
-            )}
-            {project.forks_count > 0 && (
-              <div className="flex items-center gap-1">
-                <GitFork className="w-4 h-4" />
-                {project.forks_count}
-              </div>
-            )}
-          </div>
+      {/* Cover */}
+      <div className={`relative h-44 bg-gradient-to-br ${gradient} flex items-center justify-center overflow-hidden`}>
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.style.display = "none"
+            }}
+          />
+        ) : (
+          <CategoryIcon className="w-14 h-14 text-white/40" strokeWidth={1.5} />
         )}
+
+        {project.featured && (
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-medium border border-white/30">
+            <Star className="w-3 h-3 fill-current" />
+            Featured
+          </span>
+        )}
+
+        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/30 backdrop-blur-sm text-white text-xs font-medium">
+          {project.category}
+        </span>
       </div>
 
-      {/* Technologies */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {isGithub ? (
-          project.language && (
-            <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-              {project.language}
-            </span>
-          )
-        ) : (
-          project.technologies?.map((tech) => (
+      {/* Body */}
+      <div className="p-6 flex flex-col flex-1">
+        <h3 className="font-semibold text-lg text-accent-foreground group-hover:text-primary transition-colors mb-2">
+          {project.title}
+        </h3>
+
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-5">
+          {project.technologies.map((tech) => (
             <span
               key={tech}
               className="px-3 py-1 bg-muted text-accent-foreground text-xs font-medium rounded-full"
             >
               {tech}
             </span>
-          ))
-        )}
-        
-        {project.featured && (
-          <span className="px-3 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-primary-foreground text-xs font-medium rounded-full">
-            Featured
-          </span>
-        )}
-      </div>
-
-      {/* Metadata */}
-      {isGithub && project.updated_at && (
-        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-          <Calendar className="w-4 h-4" />
-          Updated {formatDate(project.updated_at)}
+          ))}
         </div>
-      )}
 
-      {/* Actions */}
-      <div className="flex gap-3 mt-auto">
-        {isGithub ? (
-          <>
+        <div className="flex gap-3 mt-auto">
+          {project.github ? (
             <motion.a
-              href={project.html_url}
+              href={project.github}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1"
@@ -130,62 +119,40 @@ const Projects = () => {
                 Code
               </Button>
             </motion.a>
-            {project.demoUrl && (
-              <motion.a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button className="w-full">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  Live Demo
-                </Button>
-              </motion.a>
-            )}
-          </>
-        ) : (
-          <>
-            {project.github && (
-              <motion.a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button variant="outline" className="w-full">
-                  <Github className="w-4 h-4 mr-2" />
-                  Code
-                </Button>
-              </motion.a>
-            )}
-            {project.demo && (
-              <motion.a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button className="w-full">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  Live Demo
-                </Button>
-              </motion.a>
-            )}
-          </>
-        )}
+          ) : (
+            <Button variant="outline" className="flex-1 opacity-50 cursor-not-allowed" disabled>
+              <Github className="w-4 h-4 mr-2" />
+              Code
+            </Button>
+          )}
+
+          {project.demo ? (
+            <motion.a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Button className="w-full">
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Live Demo
+              </Button>
+            </motion.a>
+          ) : (
+            <Button className="flex-1 opacity-50 cursor-not-allowed" disabled>
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Live Demo
+            </Button>
+          )}
+        </div>
       </div>
     </motion.div>
   )
+}
 
-  const stats = getTotalStats()
-
+const Projects = () => {
   return (
     <section id="projects" className="py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -210,137 +177,21 @@ const Projects = () => {
             variants={itemVariants}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           >
-            A complete showcase of all my projects, from dynamic web applications to innovative solutions
+            A selection of projects, from full-stack web applications to real-time systems
           </motion.p>
-        </motion.div>
-
-        {/* GitHub Stats */}
-        {!loading && !error && (
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <motion.div
-              variants={itemVariants}
-              className="text-center p-4 glass-card rounded-lg"
-            >
-              <div className="text-2xl font-bold text-primary mb-1">
-                {stats.totalRepos}
-              </div>
-              <div className="text-sm text-muted-foreground">Repositories</div>
-            </motion.div>
-            
-            {stats.totalStars > 0 && (
-              <motion.div
-                variants={itemVariants}
-                className="text-center p-4 glass-card rounded-lg"
-              >
-                <div className="text-2xl font-bold text-primary mb-1">
-                  {stats.totalStars}
-                </div>
-                <div className="text-sm text-muted-foreground">Stars</div>
-              </motion.div>
-            )}
-            
-            {stats.totalForks > 0 && (
-              <motion.div
-                variants={itemVariants}
-                className="text-center p-4 glass-card rounded-lg"
-              >
-                <div className="text-2xl font-bold text-primary mb-1">
-                  {stats.totalForks}
-                </div>
-                <div className="text-sm text-muted-foreground">Forks</div>
-              </motion.div>
-            )}
-            
-            {stats.followers > 0 && (
-              <motion.div
-                variants={itemVariants}
-                className="text-center p-4 glass-card rounded-lg"
-              >
-                <div className="text-2xl font-bold text-primary mb-1">
-                  {stats.followers}
-                </div>
-                <div className="text-sm text-muted-foreground">Followers</div>
-              </motion.div>
-            )}
-          </motion.div>
-        )}
-
-        {/* Tab Navigation */}
-        <motion.div
-          className="flex justify-center gap-4 mb-12"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <motion.button
-            variants={itemVariants}
-            onClick={() => setActiveTab("github")}
-            className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-              activeTab === "github"
-                ? "bg-primary text-primary-foreground shadow-lg"
-                : "bg-muted text-accent-foreground hover:bg-accent"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Github className="w-4 h-4 mr-2 inline" />
-            GitHub Projects
-          </motion.button>
-          
-          <motion.button
-            variants={itemVariants}
-            onClick={() => setActiveTab("featured")}
-            className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-              activeTab === "featured"
-                ? "bg-primary text-primary-foreground shadow-lg"
-                : "bg-muted text-accent-foreground hover:bg-accent"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Star className="w-4 h-4 mr-2 inline" />
-            Featured Work
-          </motion.button>
         </motion.div>
 
         {/* Projects Grid */}
         <motion.div
-          className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
         >
-          {loading && activeTab === "github" ? (
-            <div className="col-span-full flex items-center justify-center py-20">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-              <span className="ml-3 text-muted-foreground">Loading projects...</span>
-            </div>
-          ) : error && activeTab === "github" ? (
-            <div className="col-span-full text-center py-20">
-              <div className="text-muted-foreground mb-4">
-                Failed to load GitHub projects
-              </div>
-              <Button onClick={() => window.location.reload()}>
-                Try Again
-              </Button>
-            </div>
-          ) : activeTab === "github" ? (
-            repos.map((repo) => (
-              <ProjectCard key={repo.id} project={repo} isGithub={true} />
-            ))
-          ) : (
-            staticProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} isGithub={false} />
-            ))
-          )}
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </motion.div>
 
         {/* View More Button */}

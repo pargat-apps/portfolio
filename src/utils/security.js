@@ -43,9 +43,6 @@ export const isValidExternalUrl = (url) => {
     const allowedDomains = [
       'api.github.com',
       'raw.githubusercontent.com',
-      'leetcode-stats-api.herokuapp.com',
-      'alfa-leetcode-api.onrender.com',
-      'leetcode-api-faisalshohag.vercel.app',
       'fonts.googleapis.com',
       'fonts.gstatic.com'
     ]
@@ -94,10 +91,7 @@ export const CSP_CONFIG = {
       "ws://localhost:*", // WebSocket for HMR
       "http://localhost:*", // Local development
       "https://api.github.com",
-      "https://raw.githubusercontent.com",
-      "https://leetcode-stats-api.herokuapp.com",
-      "https://alfa-leetcode-api.onrender.com",
-      "https://leetcode-api-faisalshohag.vercel.app"
+      "https://raw.githubusercontent.com"
     ],
     'object-src': ["'none'"],
     'base-uri': ["'self'"],
@@ -113,10 +107,7 @@ export const CSP_CONFIG = {
     'connect-src': [
       "'self'",
       "https://api.github.com",
-      "https://raw.githubusercontent.com",
-      "https://leetcode-stats-api.herokuapp.com",
-      "https://alfa-leetcode-api.onrender.com",
-      "https://leetcode-api-faisalshohag.vercel.app"
+      "https://raw.githubusercontent.com"
     ],
     'object-src': ["'none'"],
     'base-uri': ["'self'"],

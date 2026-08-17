@@ -6,26 +6,41 @@ import ThemeToggle from "./ui/ThemeToggle"
 import { personalInfo } from "../data/personal"
 import { useGitHub } from "../hooks/useGitHub"
 
+const navigationItems = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Contact", href: "#contact" },
+]
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("home")
   const { user } = useGitHub(personalInfo.githubUsername)
-
-  const navigationItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
-  ]
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+
+      // Re-query section elements live on every scroll rather than caching
+      // them once at mount, since a section could gain its id after async
+      // data finishes loading.
+      const scrollPosition = window.scrollY + 120
+      let current = navigationItems[0].href.slice(1)
+      for (const item of navigationItems) {
+        const section = document.querySelector(item.href)
+        if (section && section.offsetTop <= scrollPosition) {
+          current = item.href.slice(1)
+        }
+      }
+      setActiveSection(current)
     }
 
-    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -133,18 +148,32 @@ const Navbar = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navigationItems.map((item) => (
-              <motion.button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className="text-muted-foreground hover:text-accent-foreground transition-colors duration-200 font-medium"
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-              >
-                {item.name}
-              </motion.button>
-            ))}
+          <div className="hidden lg:flex items-center space-x-6">
+            {navigationItems.map((item) => {
+              const isActive = activeSection === item.href.slice(1)
+              return (
+                <motion.button
+                  key={item.name}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`relative py-2 font-medium transition-colors duration-200 ${
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-accent-foreground"
+                  }`}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ y: 0 }}
+                >
+                  {item.name}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeSectionIndicator"
+                      className="absolute left-0 right-0 -bottom-0.5 h-0.5 bg-primary rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </motion.button>
+              )
+            })}
           </div>
 
           {/* Desktop Actions */}
@@ -172,10 +201,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => {
-                console.log('Hamburger clicked, current state:', isMobileMenuOpen)
-                setIsMobileMenuOpen(!isMobileMenuOpen)
-              }}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="rounded-full"
             >
               {isMobileMenuOpen ? (
@@ -198,17 +224,24 @@ const Navbar = () => {
             className="lg:hidden glass border-t border-border/10 mt-2"
           >
             <div className="px-4 py-6 space-y-4">
-              {navigationItems.map((item) => (
-                <motion.button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left text-muted-foreground hover:text-accent-foreground transition-colors duration-200 font-medium py-3 px-2 rounded-lg hover:bg-accent/50"
-                  whileHover={{ x: 8 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item.name}
-                </motion.button>
-              ))}
+              {navigationItems.map((item) => {
+                const isActive = activeSection === item.href.slice(1)
+                return (
+                  <motion.button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.href)}
+                    className={`block w-full text-left transition-colors duration-200 font-medium py-3 px-2 rounded-lg ${
+                      isActive
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:text-accent-foreground hover:bg-accent/50"
+                    }`}
+                    whileHover={{ x: 8 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {item.name}
+                  </motion.button>
+                )
+              })}
               <motion.a
                 href={personalInfo.resume}
                 download="Pargat_Singh_Resume.pdf"

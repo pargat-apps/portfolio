@@ -1,3 +1,30 @@
+import {
+  SiJavascript,
+  SiReact,
+  SiHtml5,
+  SiCss,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiWebrtc,
+  SiMysql,
+  SiMongodb,
+  SiLinux,
+  SiDocker,
+  SiGit,
+  SiGithub,
+  SiNpm,
+  SiPostman,
+  SiMeta,
+  SiWhatsapp,
+  SiPaypal,
+  SiPaytm,
+  SiPhonepe,
+  SiClaude,
+} from "react-icons/si"
+import { FaAws } from "react-icons/fa"
+import { Webhook, Radio, Workflow } from "lucide-react"
+
 export const personalInfo = {
   name: "Pargat Singh",
   title: "Full-Stack Developer",
@@ -67,67 +94,139 @@ export const experience = [
 ]
 
 export const skills = {
-  frontend: [
-    { name: "HTML5", level: 95, category: "Frontend", icon: "🌐", color: "#E34F26" },
-    { name: "CSS3", level: 90, category: "Frontend", icon: "🎨", color: "#1572B6" },
-    { name: "Tailwind CSS", level: 95, category: "Frontend", icon: "💨", color: "#06B6D4" },
-    { name: "JavaScript (ES6+)", level: 95, category: "Frontend", icon: "⚡", color: "#F7DF1E" },
-    { name: "React.js", level: 90, category: "Frontend", icon: "⚛️", color: "#61DAFB" },
-    { name: "Redux", level: 85, category: "Frontend", icon: "🔄", color: "#764ABC" }
-  ],
-  backend: [
-    { name: "Node.js", level: 90, category: "Backend", icon: "🟢", color: "#339933" },
-    { name: "Express.js", level: 90, category: "Backend", icon: "🚀", color: "#000000" },
-    { name: "REST APIs", level: 95, category: "Backend", icon: "🔗", color: "#FF6B6B" },
-    { name: "MVC Architecture", level: 85, category: "Backend", icon: "🏗️", color: "#4ECDC4" }
-  ],
-  database: [
-    { name: "SQL", level: 90, category: "Database", icon: "📊", color: "#336791" },
-    { name: "MySQL", level: 90, category: "Database", icon: "🐬", color: "#4479A1" },
-    { name: "MongoDB", level: 85, category: "Database", icon: "🍃", color: "#47A248" },
-    { name: "PL/SQL (Oracle)", level: 80, category: "Database", icon: "🔶", color: "#F80000" }
-  ],
-  cloud: [
-    { name: "AWS EC2", level: 75, category: "Cloud", icon: "☁️", color: "#FF9900" },
-    { name: "Firewalls", level: 80, category: "Cloud", icon: "🔥", color: "#FF5722" },
-    { name: "VPN", level: 75, category: "Cloud", icon: "🔒", color: "#2196F3" },
-    { name: "Network Switches", level: 75, category: "Cloud", icon: "🔌", color: "#9C27B0" }
-  ],
-  tools: [
-    { name: "Git", level: 95, category: "Tools", icon: "📝", color: "#F05032" },
-    { name: "GitHub", level: 95, category: "Tools", icon: "🐙", color: "#181717" },
-    { name: "Linux", level: 80, category: "Tools", icon: "🐧", color: "#FCC624" },
-    { name: "Debugging", level: 90, category: "Tools", icon: "🐛", color: "#FF9800" },
-    { name: "Problem Solving", level: 95, category: "Tools", icon: "🧩", color: "#4CAF50" }
-  ]
+  frontend: {
+    title: "Languages & Front End",
+    description: "Responsive, cross-browser interfaces",
+    items: [
+      { name: "JavaScript (ES6+)", icon: SiJavascript, color: "#F7DF1E" },
+      { name: "React.js", icon: SiReact, color: "#61DAFB" },
+      { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
+      { name: "CSS3", icon: SiCss, color: "#1572B6" },
+      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+    ],
+  },
+  backend: {
+    title: "Back End & APIs",
+    description: "REST APIs, real-time systems, auth & RBAC",
+    items: [
+      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+      { name: "Express.js", icon: SiExpress, color: "#71717a" },
+      { name: "REST APIs", icon: Webhook, color: "#FF6B6B" },
+      { name: "WebSockets", icon: Radio, color: "#2dd4bf" },
+      { name: "WebRTC", icon: SiWebrtc, color: "#71717a" },
+    ],
+  },
+  database: {
+    title: "Databases",
+    description: "Schema design, indexing, query optimization",
+    items: [
+      { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+    ],
+  },
+  cloud: {
+    title: "Cloud, DevOps & Tools",
+    description: "Deployment, CI/CD and production debugging",
+    items: [
+      { name: "AWS EC2", icon: FaAws, color: "#FF9900" },
+      { name: "Linux", icon: SiLinux, color: "#FCC624" },
+      { name: "Docker", icon: SiDocker, color: "#2496ED" },
+      { name: "Git", icon: SiGit, color: "#F05032" },
+      { name: "GitHub", icon: SiGithub, color: "#71717a" },
+      { name: "CI/CD", icon: Workflow, color: "#8b5cf6" },
+      { name: "npm", icon: SiNpm, color: "#CB3837" },
+      { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+    ],
+  },
+  integrations: {
+    title: "Integrations",
+    description: "Messaging, telephony and payment gateways",
+    items: [
+      { name: "Meta Graph API", icon: SiMeta, color: "#0866FF" },
+      { name: "WhatsApp Business API", icon: SiWhatsapp, color: "#25D366" },
+      { name: "PayPal", icon: SiPaypal, color: "#00457C" },
+      { name: "Paytm", icon: SiPaytm, color: "#00BAF2" },
+      { name: "PhonePe", icon: SiPhonepe, color: "#5F259F" },
+    ],
+  },
+  ai: {
+    title: "AI-Assisted Development",
+    description: "Agentic coding, spec-driven workflows, subagents & hooks",
+    items: [
+      { name: "Claude Code", icon: SiClaude, color: "#D97757" },
+    ],
+  },
 }
 
+// Placeholder projects — swap these out with real work. Each card falls back
+// to a generated category banner when `image` is null, and hides the
+// Code/Live Demo buttons when `github`/`demo` are null, so filling in real
+// values later is enough to light everything up automatically.
 export const projects = [
   {
     id: 1,
-    title: "Real-Time Video Chat Application",
-    description: "Built a comprehensive video chat application with peer-to-peer communication using WebRTC technology. Features include real-time video/audio streaming, screen sharing, and chat messaging.",
-    technologies: ["React.js", "Node.js", "WebRTC", "Socket.io", "Express.js"],
+    title: "Full-Stack Web Application",
+    description: "A production-style full-stack app with a React front end, REST API back end and a relational data layer — replace with a real project and its live details.",
+    technologies: ["React.js", "Node.js", "Express.js", "MongoDB"],
     category: "Full-Stack",
     featured: true,
-    image: "/projects/video-chat.jpg"
+    github: null,
+    demo: null,
+    image: null
   },
   {
     id: 2,
-    title: "Customer Management System",
-    description: "Developed a scalable customer management system supporting 10,000+ records with optimized database design and efficient query performance.",
-    technologies: ["React.js", "Node.js", "MySQL", "Express.js", "REST API"],
-    category: "Full-Stack",
+    title: "E-Commerce Platform",
+    description: "Product catalog, cart and checkout flow built end to end, from schema design through to a responsive storefront UI.",
+    technologies: ["React.js", "Node.js", "MySQL", "Tailwind CSS"],
+    category: "E-Commerce",
     featured: true,
-    image: "/projects/cms.jpg"
+    github: null,
+    demo: null,
+    image: null
   },
   {
     id: 3,
-    title: "Real-Time System Monitor",
-    description: "Created asynchronous services for real-time system monitoring with automated alerts and comprehensive logging capabilities.",
-    technologies: ["Node.js", "Express.js", "MongoDB", "WebSockets"],
+    title: "Real-Time Chat & Video App",
+    description: "Peer-to-peer video and messaging with real-time presence, built on WebRTC and WebSockets for low-latency communication.",
+    technologies: ["React.js", "WebRTC", "Socket.io", "Express.js"],
+    category: "Real-Time",
+    featured: false,
+    github: null,
+    demo: null,
+    image: null
+  },
+  {
+    id: 4,
+    title: "REST API & Backend Service",
+    description: "A documented REST API with authentication, role-based access control and containerized deployment.",
+    technologies: ["Node.js", "Express.js", "MySQL", "Docker"],
     category: "Backend",
     featured: false,
-    image: "/projects/monitor.jpg"
+    github: null,
+    demo: null,
+    image: null
+  },
+  {
+    id: 5,
+    title: "Admin Dashboard",
+    description: "A role-based admin panel with data tables, search and reporting views for managing day-to-day operations.",
+    technologies: ["React.js", "Redux", "Tailwind CSS", "REST API"],
+    category: "Frontend",
+    featured: false,
+    github: null,
+    demo: null,
+    image: null
+  },
+  {
+    id: 6,
+    title: "Blockchain Credits Platform",
+    description: "An ERC-20 credit-based platform with role-based interfaces for requesting, scheduling and tracking services.",
+    technologies: ["React.js", "Node.js", "MongoDB", "Solidity"],
+    category: "Full-Stack",
+    featured: false,
+    github: null,
+    demo: null,
+    image: null
   }
 ]
