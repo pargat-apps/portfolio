@@ -74,9 +74,6 @@ const Hero = () => {
                   {personalInfo.name.split(" ")[0]}
                 </span>
               </h1>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-muted-foreground">
-                {personalInfo.title}
-              </h2>
             </motion.div>
 
             <motion.div variants={itemVariants}>

@@ -1,41 +1,158 @@
-import { motion } from "framer-motion"
-import { Calendar, MapPin, Briefcase, Award, ChevronRight, GraduationCap, Building2 } from "lucide-react"
-import { experience } from "../data/personal"
+import { useRef, useState } from "react"
+import { motion, AnimatePresence, useScroll } from "framer-motion"
+import { ChevronDown, ChevronRight } from "lucide-react"
+import { experience, techIcons } from "../data/personal"
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.5 },
+  },
+}
+
+const TimelineItem = ({ exp, index }) => {
+  const [expanded, setExpanded] = useState(false)
+  const primaryAchievements = exp.achievements.slice(0, 2)
+  const extraAchievements = exp.achievements.slice(2)
+  const isEducation = exp.type === "Education"
+
+  return (
+    <motion.div
+      className="relative pl-12 md:pl-16"
+      initial={{ opacity: 0, x: -24 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
+    >
+      {/* Timeline node */}
+      <div className="absolute left-4 md:left-6 top-2 -translate-x-1/2">
+        {index === 0 && (
+          <motion.span
+            className="absolute inset-0 rounded-full bg-primary/40"
+            animate={{ scale: [1, 1.8], opacity: [0.6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+          />
+        )}
+        <motion.div
+          className={`relative w-3 h-3 rounded-full border-2 border-background ${
+            isEducation ? "bg-blue-500" : "bg-primary"
+          }`}
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: (index % 4) * 0.08 + 0.15, type: "spring", stiffness: 350, damping: 20 }}
+        />
+      </div>
+
+      <motion.div
+        className="glass-card p-5 sm:p-6 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
+        whileHover={{ y: -2 }}
+      >
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
+          <span
+            className={`text-xs font-semibold tracking-wider uppercase ${
+              isEducation ? "text-blue-500" : "text-primary"
+            }`}
+          >
+            {exp.type}
+          </span>
+          <span className="text-xs text-muted-foreground">{exp.duration}</span>
+        </div>
+
+        <h3 className="text-lg sm:text-xl font-bold text-accent-foreground mb-1">
+          {exp.role}
+        </h3>
+        <div className="flex flex-wrap items-center gap-x-1.5 text-sm text-muted-foreground mb-3">
+          <span className="font-medium text-accent-foreground/80">{exp.company}</span>
+          <span className="text-muted-foreground/50">·</span>
+          <span>{exp.location}</span>
+        </div>
+
+        <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+          {exp.description}
+        </p>
+
+        {primaryAchievements.length > 0 && (
+          <ul className="space-y-1.5">
+            {primaryAchievements.map((achievement, i) => (
+              <li key={i} className="flex gap-2 text-sm text-muted-foreground leading-relaxed">
+                <span className="text-primary/60 select-none">–</span>
+                <span>{achievement}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <AnimatePresence initial={false}>
+          {expanded && extraAchievements.length > 0 && (
+            <motion.ul
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="space-y-1.5 overflow-hidden"
+            >
+              {extraAchievements.map((achievement, i) => (
+                <li key={i} className="flex gap-2 text-sm text-muted-foreground leading-relaxed pt-1.5">
+                  <span className="text-primary/60 select-none">–</span>
+                  <span>{achievement}</span>
+                </li>
+              ))}
+            </motion.ul>
+          )}
+        </AnimatePresence>
+
+        {extraAchievements.length > 0 && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline mt-2"
+          >
+            {expanded ? "Show less" : `Show ${extraAchievements.length} more`}
+            <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`} />
+          </button>
+        )}
+
+        {exp.technologies.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-4">
+            {exp.technologies.map((tech) => {
+              const iconData = techIcons[tech]
+              const Icon = iconData?.icon
+              return (
+                <span
+                  key={tech}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted/70 text-xs font-medium text-accent-foreground/80"
+                >
+                  {Icon && <Icon className="w-3 h-3" style={{ color: iconData.color }} />}
+                  {tech}
+                </span>
+              )
+            })}
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  )
+}
 
 const Experience = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  }
-
-  const timelineVariants = {
-    hidden: { scaleY: 0 },
-    visible: {
-      scaleY: 1,
-      transition: {
-        duration: 1.5,
-        ease: "easeInOut",
-      },
-    },
-  }
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  })
 
   return (
     <section id="experience" className="py-20 lg:py-32">
@@ -61,220 +178,40 @@ const Experience = () => {
             variants={itemVariants}
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
           >
-            My educational pursuits and professional experience in full-stack development
+            Where I've studied and worked, from B.Tech to full-stack development
           </motion.p>
         </motion.div>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Timeline Line */}
+        <div ref={containerRef} className="relative max-w-3xl mx-auto">
+          {/* Base line */}
+          <div className="absolute left-4 md:left-6 top-2 bottom-2 w-px bg-border" />
+          {/* Scroll-linked progress line */}
           <motion.div
-            className="absolute left-6 sm:left-8 md:left-1/2 transform md:-translate-x-1/2 w-0.5 bg-gradient-to-b from-primary to-blue-600 origin-top"
-            style={{ height: "calc(100% - 2rem)" }}
-            variants={timelineVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+            className="absolute left-4 md:left-6 top-2 bottom-2 w-px bg-gradient-to-b from-primary to-blue-600 origin-top"
+            style={{ scaleY: scrollYProgress }}
           />
 
-          <div className="space-y-12">
+          <div className="space-y-8">
             {experience.map((exp, index) => (
-              <motion.div
-                key={exp.id}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                } flex-col md:gap-8`}
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                {/* Timeline Node */}
-                <motion.div
-                  className={`absolute left-6 sm:left-8 md:left-1/2 transform -translate-x-1/2 w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 sm:border-4 border-background shadow-lg z-10 flex items-center justify-center ${
-                    exp.duration.includes("Present") 
-                      ? "bg-gradient-to-r from-green-500 to-emerald-600 animate-pulse" 
-                      : exp.type === "Education"
-                      ? "bg-gradient-to-r from-blue-500 to-indigo-600"
-                      : "bg-gradient-to-r from-primary to-blue-600"
-                  }`}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.3, rotate: 360 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {exp.type === "Education" ? (
-                    <GraduationCap className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                  ) : (
-                    <Building2 className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                  )}
-                </motion.div>
-
-                {/* Content Card */}
-                <motion.div
-                  className={`w-full md:w-5/12 ml-12 sm:ml-16 md:ml-0 px-2 sm:px-0 ${
-                    index % 2 === 0 ? "" : "md:text-right"
-                  }`}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className={`glass-card p-4 sm:p-6 hover:shadow-xl transition-all duration-300 group relative overflow-hidden ${
-                    exp.duration.includes("Present") ? "ring-2 ring-green-500/30" : ""
-                  }`}>
-                    {/* Current Status Indicator */}
-                    {exp.duration.includes("Present") && (
-                      <div className="absolute top-0 right-0 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-1 rounded-bl-lg">
-                        CURRENT
-                      </div>
-                    )}
-                    
-                    {/* Header */}
-                    <div className="mb-4">
-                      <div className={`flex items-center gap-2 mb-3 ${
-                        index % 2 === 0 ? "" : "md:justify-end"
-                      }`}>
-                        <div className={`px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-2 ${
-                          exp.type === "Education"
-                            ? exp.duration.includes("Present")
-                              ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-300 dark:border-green-600"
-                              : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border border-blue-300 dark:border-blue-600"
-                            : "bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600"
-                        }`}>
-                          {exp.type === "Education" ? (
-                            <GraduationCap className="w-4 h-4" />
-                          ) : (
-                            <Briefcase className="w-4 h-4" />
-                          )}
-                          {exp.type}
-                        </div>
-                      </div>
-                      
-                      <h3 className={`text-lg sm:text-xl lg:text-2xl font-bold mb-2 transition-colors ${
-                        exp.duration.includes("Present") 
-                          ? "text-green-600 dark:text-green-400" 
-                          : "text-accent-foreground group-hover:text-primary"
-                      }`}>
-                        {exp.role}
-                      </h3>
-                      
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          {exp.type === "Education" ? (
-                            <GraduationCap className="w-5 h-5 text-primary" />
-                          ) : (
-                            <Building2 className="w-5 h-5 text-primary" />
-                          )}
-                          <span className="font-semibold text-accent-foreground text-base sm:text-lg">{exp.company}</span>
-                        </div>
-                        
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-muted-foreground">
-                          <div className="flex items-center gap-1">
-                            <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
-                            <span className="text-sm sm:text-base">{exp.location}</span>
-                          </div>
-                          <div className={`flex items-center gap-1 ${
-                            exp.duration.includes("Present") ? "text-green-600 dark:text-green-400" : "text-primary"
-                          }`}>
-                            <Calendar className="w-4 h-4 flex-shrink-0" />
-                            <span className="font-semibold text-sm sm:text-base">{exp.duration}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-muted-foreground mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-                      {exp.description}
-                    </p>
-
-                    {/* Achievements */}
-                    {exp.achievements.length > 0 && (
-                      <div className="mb-4 sm:mb-6">
-                        <h4 className="font-semibold text-accent-foreground mb-3 flex items-center gap-2 text-sm sm:text-base">
-                          <Award className="w-4 h-4 text-primary flex-shrink-0" />
-                          Key Achievements
-                        </h4>
-                        <ul className="space-y-2">
-                          {exp.achievements.map((achievement, achIndex) => (
-                            <motion.li
-                              key={achIndex}
-                              className="flex items-start gap-2 text-muted-foreground"
-                              initial={{ opacity: 0, x: -10 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              viewport={{ once: true }}
-                              transition={{ delay: achIndex * 0.1 }}
-                            >
-                              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 mt-0.5 text-primary flex-shrink-0" />
-                              <span className="leading-relaxed text-sm sm:text-base">{achievement}</span>
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {/* Technologies */}
-                    {exp.technologies.length > 0 && (
-                      <div>
-                        <h4 className="font-semibold text-accent-foreground mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
-                          <div className="w-2 h-2 bg-gradient-to-r from-primary to-blue-600 rounded-full flex-shrink-0" />
-                          Technologies & Skills
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {exp.technologies.map((tech, techIndex) => (
-                            <motion.span
-                              key={tech}
-                              className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full border transition-all duration-200 ${
-                                exp.type === "Education"
-                                  ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/40"
-                                  : "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20"
-                              }`}
-                              whileHover={{ scale: 1.05, y: -2 }}
-                              whileTap={{ scale: 0.95 }}
-                              initial={{ opacity: 0, x: -20 }}
-                              whileInView={{ opacity: 1, x: 0 }}
-                              viewport={{ once: true }}
-                              transition={{ delay: techIndex * 0.05 }}
-                            >
-                              {tech}
-                            </motion.span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Hover Gradient Effect */}
-                    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/0 to-blue-600/0 group-hover:from-primary/5 group-hover:to-blue-600/5 transition-all duration-300 pointer-events-none" />
-                  </div>
-                </motion.div>
-
-                {/* Spacer for desktop */}
-                <div className="hidden md:block w-5/12" />
-              </motion.div>
+              <TimelineItem key={exp.id} exp={exp} index={index} />
             ))}
           </div>
-
-          {/* Timeline End Cap */}
-          <motion.div
-            className="absolute bottom-0 left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-primary to-blue-600 rounded-full"
-            variants={itemVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          />
         </div>
 
         {/* Call to Action */}
         <motion.div
           className="text-center mt-16"
-          variants={itemVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
         >
           <div className="glass-card p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-accent-foreground mb-4">
               Ready for the Next Challenge
             </h3>
             <p className="text-muted-foreground mb-6">
-              I'm always excited to take on new projects and collaborate with talented teams. 
+              I'm always excited to take on new projects and collaborate with talented teams.
               Let's build something amazing together!
             </p>
             <motion.button

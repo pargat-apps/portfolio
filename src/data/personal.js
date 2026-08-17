@@ -112,6 +112,27 @@ export const experience = [
   }
 ]
 
+// Shared icon lookup for technology chips (Experience timeline, etc.) —
+// reuses the same icon set as the Skills section for visual consistency.
+export const techIcons = {
+  "JavaScript": { icon: SiJavascript, color: "#F7DF1E" },
+  "React.js": { icon: SiReact, color: "#61DAFB" },
+  "HTML5": { icon: SiHtml5, color: "#E34F26" },
+  "CSS3": { icon: SiCss, color: "#1572B6" },
+  "Node.js": { icon: SiNodedotjs, color: "#339933" },
+  "Express.js": { icon: SiExpress, color: "#71717a" },
+  "MongoDB": { icon: SiMongodb, color: "#47A248" },
+  "MySQL": { icon: SiMysql, color: "#4479A1" },
+  "AWS EC2": { icon: FaAws, color: "#FF9900" },
+  "Docker": { icon: SiDocker, color: "#2496ED" },
+  "Git": { icon: SiGit, color: "#F05032" },
+  "GitHub": { icon: SiGithub, color: "#71717a" },
+  "CI/CD": { icon: Workflow, color: "#8b5cf6" },
+  "WebRTC": { icon: SiWebrtc, color: "#71717a" },
+  "WebSockets": { icon: Radio, color: "#2dd4bf" },
+  "REST APIs": { icon: Webhook, color: "#FF6B6B" },
+}
+
 export const skills = {
   frontend: {
     title: "Languages & Front End",
