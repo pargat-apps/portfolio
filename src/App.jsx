@@ -8,6 +8,7 @@ import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Mascot from './components/Mascot'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <Mascot />
       </div>
     </Provider>
   )

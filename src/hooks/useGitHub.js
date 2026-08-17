@@ -19,6 +19,7 @@ export const useGitHub = (username) => {
       try {
         setLoading(true)
         setError(null)
+        window.dispatchEvent(new CustomEvent('github:loading'))
 
         // Fetch user data and repositories in parallel
         const [userResult, reposResult] = await Promise.all([
@@ -73,11 +74,13 @@ export const useGitHub = (username) => {
         setRepos(enhancedRepos)
       } catch (err) {
         setError(err.message)
+        window.dispatchEvent(new CustomEvent('github:error', { detail: err.message }))
         if (process.env.NODE_ENV === 'development') {
           console.error('Error fetching GitHub data:', err)
         }
       } finally {
         setLoading(false)
+        window.dispatchEvent(new CustomEvent('github:loaded'))
       }
     }
 
